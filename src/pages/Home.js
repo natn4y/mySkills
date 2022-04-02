@@ -1,5 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, Platform} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Platform,
+  ScrollView,
+  FlatList,
+} from 'react-native';
 import {Button} from '../components/Button';
 import {SkillCard} from '../components/SkillCard';
 
@@ -21,12 +29,17 @@ export function Home() {
           placeholderTextColor={'#ffffff49'}
           onChangeText={text => setNewSkill(text)}
         />
+
         <Button onPress={handleAddNewSkill} />
+
         <Text style={[styles.title, {marginVertical: 50}]}>My Skills</Text>
 
-        {mySkills.map(skill => (
-          <SkillCard />
-        ))}
+        <FlatList
+          data={mySkills}
+          keyExtractor={item => item}
+          renderItem={({item}) => <SkillCard skill={item} />}>
+          )
+        </FlatList>
       </View>
     </>
   );
